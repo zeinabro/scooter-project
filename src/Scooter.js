@@ -39,7 +39,7 @@ class Scooter {
 
   async requestRepair(){
     console.log("Starting repair")
-    await new Promise(resolve => setTimeout(resolve,5000))
+    await new Promise(resolve => setTimeout(resolve,2000))
     this.isBroken=false
     console.log("Repair complete")
   }

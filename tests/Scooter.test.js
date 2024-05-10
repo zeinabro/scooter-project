@@ -1,6 +1,6 @@
 const Scooter = require('../src/Scooter')
 
-const scooter = new Scooter("Station 1",null,100,false)
+const scooter = new Scooter("Station 1")
 
 // typeof scooter === object
 describe('scooter object', () => {
@@ -30,9 +30,11 @@ describe('scooter methods', () => {
   })
 
   test("Scooter cannot be rented when not charged or broken",() => {
-    const scooter2 = new Scooter("Station 1",null,19,false)
+    const scooter2 = new Scooter("Station 1")
+    scooter2.charge = 19
     expect(()=>scooter2.rent({username: "Test user"})).toThrow("Scooter needs to be charged.")
-    scooter.isBroken = true
+    scooter2.charge = 25
+    scooter2.isBroken = true
     expect(()=>scooter2.rent({username: "Test user"})).toThrow("Scooter needs to be repaired.")
   })
 
@@ -45,13 +47,15 @@ describe('scooter methods', () => {
 
   // requestRepair method
   test("Scooter can be requested to be repaired", async() => {
+    scooter.isBroken = true
     await scooter.requestRepair()
-    expect(scooter.isBroken).toBe(true)
+    expect(scooter.isBroken).toBe(false)
   })
 
   // charge method
   test("Scooter can be charged", async () => {
-    await scooter.charge()
-    expect(newScooter.charge).toBe(100);
+    scooter.charge = 20
+    await scooter.recharge()
+    expect(scooter.charge).toBe(100);
 });
 })
