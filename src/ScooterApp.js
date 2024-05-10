@@ -29,10 +29,14 @@ class ScooterApp {
   }
 
   loginUser(username,password){
-    if (!this.registeredUsers[username] || this.registeredUsers[username].password !== password){
+    if (!this.registeredUsers[username]){
       throw new Error("Username or password is incorrect")
     }
-    this.registeredUsers[username].login()
+    try {
+      this.registeredUsers[username].login(password)
+    } catch (err) {
+      throw new Error("Username or password is incorrect")
+    }
     console.log("User has been logged in")
   }
 
@@ -61,6 +65,7 @@ class ScooterApp {
     if (this.stations[station].indexOf(scooter) !== -1){
       throw new Error("Scooter is already at station")
     }
+    scooter.dock(station)
     this.stations[station].push(scooter)
     console.log("Scooter docked")
   }
@@ -82,11 +87,13 @@ class ScooterApp {
   }
 
   print(){
-    for (const [key,value] in Object.entries(this.registeredUsers)){
+    console.log("Registered users:")
+    for (const [key,value] of Object.entries(this.registeredUsers)){
       console.log(`${key}: ${value.forEach(user=>user.username)}`)
     }
-    for (const [key,value] in Object.entries(this.stations)){
-      console.log(`${key}: Num scooters: ${value.length}`)
+    console.log("\nStations:")
+    for (const [key,value] of Object.entries(this.stations)){
+      console.log(`${key}: ${value.length} scooters`)
     }
   }
 }

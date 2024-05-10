@@ -67,7 +67,7 @@ describe("create scooter method tests",()=>{
   })
 
   test("adds stations and assigns station to scooter",()=>{
-    expect(scooterApp.stations.station1[0].station).toEqual("Station 1")
+    expect(scooterApp.stations["Station 1"].length).toBe(1)
     expect(scooter.station).toBe("Station 1")
   })
 
@@ -84,7 +84,7 @@ describe("rent scooter method tests",()=>{
 
   test("scooter can be rented",()=>{
     scooterApp.rentScooter(scooter,user)
-    expect(scooterApp.stations.station2.length).toBe(0)
+    expect(scooterApp.stations["Station 2"].length).toBe(0)
     expect(scooter.user.username).toBe("John")
   })
 
@@ -102,16 +102,16 @@ describe("dock scooter method tests",()=>{
   scooter.user = {username:"User"}
 
   test("scooter can be docked",()=>{
-    scooterApp.dockScooter(scooter,"Station 3")
-    expect(scooter.station).toBe("Station 3")
+    scooterApp.dockScooter(scooter,"Station 2")
+    expect(scooter.station).toBe("Station 2")
     expect(scooter.user).toBe(null)
-    expect(scooterApp.stations.station3.length).toBe(1)
+    expect(scooterApp.stations["Station 2"].length).toBe(1)
   })
 
   test("throws error if scooter already docked",()=>{
-    scooter.station="Station 3"
+    scooter.station="Station 2"
     scooter.user=null
-    expect(()=>scooterApp.dockScooter(scooter,"Station 3")).toThrow("Scooter is already at station")
+    expect(()=>scooterApp.dockScooter(scooter,"Station 2")).toThrow("Scooter is already at station")
   })
 
   test("throws error if station does not exist",()=>{
