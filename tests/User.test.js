@@ -10,8 +10,8 @@ describe('User property tests', () => {
     expect(user.username).toBe("Joe Bloggs")
   })
   // test password
-  test("password is a string",()=>{
-    expect(typeof user.password).toBe('string')
+  test("password cannot be accessed",()=>{
+    expect(user.password).toBe(undefined)
   })
   // test age
   test("age is correctly assigned and number",()=>{
