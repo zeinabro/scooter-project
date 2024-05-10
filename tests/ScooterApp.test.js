@@ -120,3 +120,13 @@ describe("dock scooter method tests",()=>{
     expect(()=>scooterApp.dockScooter(scooter,"xyz")).toThrow(`Station "xyz" does not exist`)
   })
 })
+
+// print function
+describe("print function tests",()=>{
+  test("print is a function",()=>{
+    expect(scooterApp.print).toBeTruthy()
+    scooterApp.print()
+    scooterApp.registerUser("username","password",18)
+    scooterApp.print()
+  })
+})

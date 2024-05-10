@@ -89,7 +89,7 @@ class ScooterApp {
   print(){
     console.log("Registered users:")
     for (const [key,value] of Object.entries(this.registeredUsers)){
-      console.log(`${key}: ${value.forEach(user=>user.username)}`)
+      console.log(`${key}, age ${value.age}`)
     }
     console.log("\nStations:")
     for (const [key,value] of Object.entries(this.stations)){
