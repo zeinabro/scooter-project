@@ -32,10 +32,10 @@ describe('scooter methods', () => {
   test("Scooter cannot be rented when not charged or broken",() => {
     const scooter2 = new Scooter("Station 1")
     scooter2.charge = 19
-    expect(()=>scooter2.rent({username: "Test user"})).toThrow("Scooter needs to be charged.")
+    expect(()=>scooter2.rent({username: "Test user"})).toThrow(`Scooter #${scooter2.serial} needs to be charged.`)
     scooter2.charge = 25
     scooter2.isBroken = true
-    expect(()=>scooter2.rent({username: "Test user"})).toThrow("Scooter needs to be repaired.")
+    expect(()=>scooter2.rent({username: "Test user"})).toThrow(`Scooter #${scooter2.serial} needs to be repaired.`)
   })
 
   // dock method

@@ -72,7 +72,7 @@ describe("create scooter method tests",()=>{
   })
 
   test("throws error if station does not exist",() => {
-    expect(()=>scooterApp.createScooter("xyz")).toThrow("Station does not exist")
+    expect(()=>scooterApp.createScooter("xyz")).toThrow(`Station "xyz" does not exist`)
   })
 
 })
@@ -90,7 +90,7 @@ describe("rent scooter method tests",()=>{
 
   test("scooter cannot be rented if already rented",()=>{
     scooter.user={username:"user"}
-    expect(()=>scooterApp.rentScooter(scooter,user)).toThrow("Scooter already rented")
+    expect(()=>scooterApp.rentScooter(scooter,user)).toThrow(`Scooter #${scooter.serial} already rented`)
   })
 
 })
@@ -111,12 +111,12 @@ describe("dock scooter method tests",()=>{
   test("throws error if scooter already docked",()=>{
     scooter.station="Station 2"
     scooter.user=null
-    expect(()=>scooterApp.dockScooter(scooter,"Station 2")).toThrow("Scooter is already at station")
+    expect(()=>scooterApp.dockScooter(scooter,"Station 2")).toThrow(`Scooter #${scooter.serial} is already at Station 2`)
   })
 
   test("throws error if station does not exist",()=>{
     scooter.station=null
     scooter.user={username:"User"}
-    expect(()=>scooterApp.dockScooter(scooter,"xyz")).toThrow("Station does not exist")
+    expect(()=>scooterApp.dockScooter(scooter,"xyz")).toThrow(`Station "xyz" does not exist`)
   })
 })
